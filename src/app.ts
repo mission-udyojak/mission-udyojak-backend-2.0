@@ -3,6 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import membershipRoutes from "./routes/membership.routes";
+
 const app = express();
 
 app.use(cors());
@@ -15,8 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (_, res) => {
   res.json({
     success: true,
-    message: "Mission Foundation API Running",
+    message: "Mission Foundation API Running 🚀",
   });
 });
+
+app.use("/api/memberships", membershipRoutes);
 
 export default app;
