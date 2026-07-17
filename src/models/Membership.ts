@@ -4,7 +4,7 @@ export interface IMembership extends Document {
   // Personal Details
   fullName: string;
   fatherOrSpouseName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   gender: "Male" | "Female" | "Other";
   mobileNumber: string;
   email: string;
@@ -46,12 +46,12 @@ export interface IMembership extends Document {
   amountPaid: number;
   paymentMode: "Cash" | "UPI" | "Bank Transfer";
   transactionId?: string;
-  paymentDate: Date;
+  paymentDate: string;
 
   // Declaration
   declarationAccepted: boolean;
   signature: string;
-  declarationDate: Date;
+  declarationDate: string;
 
   // Office Use Only
   membershipId?: string;
@@ -73,7 +73,7 @@ const membershipSchema = new Schema<IMembership>(
       trim: true,
     },
     dateOfBirth: {
-      type: Date,
+      type: String,
       required: false,
     },
     gender: {
@@ -181,7 +181,7 @@ const membershipSchema = new Schema<IMembership>(
       type: String,
     },
     paymentDate: {
-      type: Date,
+      type: String,
       required: false,
     },
 
@@ -195,7 +195,7 @@ const membershipSchema = new Schema<IMembership>(
       required: false,
     },
     declarationDate: {
-      type: Date,
+      type: String,
       required: false,
     },
 

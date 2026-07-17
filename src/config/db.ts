@@ -1,18 +1,33 @@
-import dns from "node:dns";
+import dns from "dns";
 import mongoose from "mongoose";
 
-// Use Google's public DNS servers globally
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const connectDB = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGO_URI as string);
+    const mongoUri = process.env.MONGO_URI;
 
-    console.log("✅ MongoDB Connected Successfully");
-  } catch (error) {
-    console.error("❌ MongoDB Connection Failed:", error);
-    process.exit(1);
+    if (!mongoUri) {
+      throw new Error("MONGO_URI is not defined in environment variables");
+    }
+
+    await mongoose.connect(mongoUri);
+
+    console.log("MongoDB connected successfully");
+  } catch (error: any) {
+    console.error("MongoDB connection error:", error.message);
+    process.exit(1); // stop the app if DB connection fails
   }
 };
 
+// Optional: log runtime connection events (disconnects, errors after initial connect)
+mongoose.connection.on("disconnected", () => {
+  console.warn("MongoDB disconnected");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB error:", err);
+});
+
 export default connectDB;
+
