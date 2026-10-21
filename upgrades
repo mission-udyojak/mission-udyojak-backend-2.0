@@ -1,0 +1,24 @@
+Act as an expert Senior Backend Engineer and Cloud Architect. I am developing a production-ready Node.js + Express backend written in TypeScript for an NGO application called "Mission Udyojak". 
+
+This backend handles digital form submissions from a mobile application built in React Native. The architecture must be highly secure, stable, and ready to clear Google Play Console production reviews.
+
+We are migrating away from the Render Free Tier to a zero-sleep containerized platform (like Google Cloud Run) to fix a 60-second "cold start" sleep lag. 
+
+Please analyze my current repository files (which I will provide below) and generate the updated, fixed code files along with new infrastructure files. Ensure the following production requirements are fully implemented:
+
+1. COMPILATION & BUILD FIXES: Ensure package.json and tsconfig.json are correctly configured to compile TypeScript into a clean 'dist/' folder. Remove development tools like 'ts-node-dev' or 'ts-node' from the production execution lifecycle to avoid memory leaks.
+2. DOCKER CONTAINERIZATION: Create a production-grade multi-stage Dockerfile that builds the TS code in an isolated step, discards devDependencies, and runs a slim, secure Node node image on port 8080.
+3. DATA RESILIENCY & CRASH PREVENTION: Implement strict Mongoose schema validation for form submissions. Ensure the main server file handles graceful shutdowns (SIGTERM / SIGINT) by securely closing the MongoDB Atlas connection before exiting to prevent data corruption.
+4. ERROR HANDLING & SECURITY: Implement robust try/catch blocks for database transactions, CORS configuration optimized for our app, and ensure all private strings (like the Mongo URI) are loaded securely from process.env.
+
+Here are my project files:
+
+[PASTE YOUR package.json HERE]
+
+[PASTE YOUR tsconfig.json HERE]
+
+[PASTE YOUR src/index.ts OR MAIN SERVER FILE HERE]
+
+[PASTE YOUR FORM SUBMISSION ROUTE/CONTROLLER FILE HERE]
+
+Please review these, fix any issues, and give me the updated code scripts!
